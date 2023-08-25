@@ -10,5 +10,13 @@
         "psr-4": {
             "Speardevs\\PhpStandards\\": "src/"
         }
+    },
+    "scripts": {
+        "install-phpstan-config": [
+          "touch phpstan.neon"
+        ],
+        "post-install-cmd": [
+            "@install-phpstan-config"
+        ]
     }
 }
