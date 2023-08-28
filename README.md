@@ -22,3 +22,7 @@
 ```shell
 composer require speardevs/php-standards --dev
 ```
+
+> **Warning**
+> Allow to execute recipes
+![img.png](images/recipes.png)
