@@ -11,10 +11,11 @@ use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/config',
-        __DIR__ . '/public',
         __DIR__ . '/src',
+        __DIR__ . '/tests',
     ]);
+
+    $rectorConfig->importNames();
 
     $rectorConfig->sets([
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
