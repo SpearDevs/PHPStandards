@@ -1,0 +1,33 @@
+name: SpearDevs pipelines
+
+on: [ pull_request ]
+
+jobs:
+    rector:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v3
+
+            -   name: Cache Composer dependencies
+                uses: actions/cache@v3
+                with:
+                    path: /tmp/composer-cache
+                    key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+            -   uses: php-actions/composer@v6
+                with:
+                    php_version: '8.2'
+                    version: 2
+                    php_extensions: intl zip exif gd
+                    memory_limit: -1
+
+            -   name: Run Rector
+                run: vendor/bin/rector process --dry-run --clear-cache
+
+            -   name: Run PHPStan
+                uses: php-actions/phpstan@v3
+                with:
+                    configuration: phpstan.neon
+
+            -   name: Run PHPUnit tests
+                run: vendor/bin/phpunit
