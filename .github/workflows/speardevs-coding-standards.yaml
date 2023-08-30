@@ -1,9 +1,9 @@
-name: SpearDevs pipelines
+name: SpearDevs
 
 on: [ pull_request ]
 
 jobs:
-    rector:
+    coding_standards:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v3
@@ -14,12 +14,16 @@ jobs:
                     path: /tmp/composer-cache
                     key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
-            -   uses: php-actions/composer@v6
+            -   name: Setup PHP with composer v2
+                uses: shivammathur/setup-php@v2
                 with:
-                    php_version: '8.2'
-                    version: 2
-                    php_extensions: intl zip exif gd
-                    memory_limit: -1
+                    php-version: '8.2'
+                    tools: composer:v2
+                env:
+                    COMPOSER_AUTH_JSON: '{"github-oauth": {"github.com": "${{ secrets.SPEARDEVS_PIPELINES_KEY }}"} }'
+
+            -   name: Install dependencies
+                run: composer install --prefer-dist
 
             -   name: Run Rector
                 run: vendor/bin/rector process --dry-run --clear-cache
@@ -28,6 +32,9 @@ jobs:
                 uses: php-actions/phpstan@v3
                 with:
                     configuration: phpstan.neon
+
+            -   name: Check coding standards
+                run: vendor/bin/ecs check --clear-cache
 
             -   name: Run PHPUnit tests
                 run: vendor/bin/phpunit
