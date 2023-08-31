@@ -1,6 +1,8 @@
 {
     "name": "speardevs/php-standards",
+    "license": "MIT",
     "type": "library",
+    "description": "PHP coding standard package",
     "require": {
         "phpstan/phpstan": "^1.10",
         "rector/rector": "^0.18.0",
