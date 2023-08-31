@@ -50,5 +50,20 @@ create new GitHub Action's secret key `SPEARDEVS_PIPELINES_KEY` with generated t
 
 ## Notes
 
-1. If amount of changes to apply for PHPStan is overwhelming, you
-   can [generate baseline](https://phpstan.org/user-guide/baseline) and then slowly improve code file by file.
+### PHP
+
+Default PHP version in package is defined as `8.2`. If adjustment is needed then update following files:
+
+* `.github/workflows/speardevs-coding-standards.yaml` - set correct PHP version for `php-version` key
+* `rector.php` - replace `LevelSetList::UP_TO_PHP_82` set list name with proper version;
+  example: `LevelSetList::UP_TO_PHP_74`
+
+### PHPStan
+
+If amount of changes to apply is overwhelming, you
+can [generate baseline](https://phpstan.org/user-guide/baseline) and then slowly improve code file by file.
+
+### PHPUnit
+
+If project has no implemented tests, comment `Run PHPUnit tests` step in pipeline defined
+in `.github/workflows/speardevs-coding-standards.yaml` to pass correctly job.
