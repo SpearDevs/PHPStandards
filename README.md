@@ -2,7 +2,7 @@
 
 ## Features
 
-Speardevs PHP Standards package contains:
+SpearDevs PHP Standards package contains:
 
 * PHPStan
 * Easy Coding Standard
