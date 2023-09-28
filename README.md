@@ -1,4 +1,4 @@
-# Speardevs PHP Standards
+# SpearDevs PHP Standards
 
 ## Features
 
