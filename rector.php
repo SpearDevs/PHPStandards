@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\PHPUnit\Set\PHPUnitLevelSetList;
+use Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->skip([
+//        __DIR__ . '/tests/Application', # Uncomment for Sylius plugins
+        FinalizeClassesWithoutChildrenRector::class => [
+            __DIR__ . '/src/Entity',
+        ],
+        ClassPropertyAssignToConstructorPromotionRector::class => [
+            __DIR__ . '/src/Entity',
+        ],
+    ]);
+
     $rectorConfig->paths([
         __DIR__ . '/src',
         __DIR__ . '/tests',
