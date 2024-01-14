@@ -27,7 +27,7 @@ SpearDevs PHP Standards package contains:
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:SpearDevs/php-standards.git"
+            "url": "git@github.com:SpearDevs/PHPStandards.git"
         }
     ]
 }
